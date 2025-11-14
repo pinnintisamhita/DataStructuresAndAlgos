@@ -1,0 +1,87 @@
+public class MyClass {
+    
+  static int[] arr;
+  static int size;
+    
+  public static void insert(int val)
+  {
+      size++;
+      int index = size;
+      //insert a value at the end
+      arr[index] = val;
+      //find the parent
+      int parent = index/2;
+      while(parent>0 && arr[parent]<arr[index])
+      {
+          swap(parent,index);
+          index = parent;
+          parent = index/2;
+          
+      }
+  }
+  public static void delete()
+  {
+      if(size==0)
+      {
+          return;
+      }
+      //put the last element in the first place;
+      arr[1] = arr[size];
+      size--;
+      int i=1;
+      //go till the end of array by swapping the childnodes if those nodes have greater value than parent node
+      while(i<size)
+      {
+           int left = 2*i;
+           int right = 2*i +1;
+           int largest = i;
+           if(left<size && arr[left]>arr[largest])
+           {
+               largest = left;
+           }
+           //largest points to the largest value of parent,left,right now;  
+           if(right<size && arr[right]>arr[largest])
+           
+           {
+               largest = right;
+           }
+          
+          if(largest!=i)
+          {
+              swap(largest,i);
+              i = largest;
+              
+          }
+           else
+           {
+               return;
+           } 
+      }
+     
+      
+  }
+  public static void main(String args[]) {
+     arr = new int[6];
+     size =0;
+     arr[0] = -1;
+    
+     insert(2);
+     insert(3);
+     insert(5);
+     print(arr);
+     
+  }
+  public static void swap(int a1,int a2)
+  {
+      int temp = arr[a1];
+      arr[a1] = arr[a2];
+      arr[a2] = temp;
+  }
+  public static void print(int[] arr)
+  {
+      for(int num:arr)
+      {
+          System.out.println(num);
+      }
+  }
+}
