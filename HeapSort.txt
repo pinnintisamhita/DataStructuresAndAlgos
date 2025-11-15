@@ -1,0 +1,60 @@
+//Heap sort needs to build array to heap and then 
+//--> first swap first and last element.
+//Now,bring the root element to its correct position using heapify again
+//then repeat the process until all the elements are processed . at last element at pos 1 is already processed
+public class MyClass {
+  public static void heapSort(int []arr)
+  {
+      int size = arr.length;
+      size--;
+      while(size>1)
+      {
+          swap(arr,size,1);
+          size--;
+      }
+  }
+   
+  public static void heapify(int arr[],int n,int i){
+     int largest = i;
+     int left = 2*i;
+     int right = 2*i +1;
+     if(left<n && arr[left]>arr[largest])
+     {
+         largest = left;
+     }
+     if(right<n && arr[right]>arr[largest])
+     {
+         largest = right;
+     }
+     if(largest!=i)
+     {
+         swap(arr,largest,i);
+         heapify(arr,n,largest);
+     }
+     
+ }
+  public static void print(int[] arr)
+  {
+      for(int num:arr)
+      {
+          System.out.println(num);
+      }
+  }
+    public static void swap(int arr[],int a1,int a2)
+  {
+      int temp = arr[a1];
+      arr[a1] = arr[a2];
+      arr[a2] = temp;
+  }
+  public static void main(String args[]) {
+    int arr[] = {-1,5,6,8,10};
+     int n = arr.length;
+     for(int i=n/2;i>0;i--)
+     {
+        heapify(arr,n,i);   
+     }
+     heapSort(arr);
+     print(arr);   
+            
+  }
+}
